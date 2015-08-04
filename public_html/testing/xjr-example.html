@@ -1,0 +1,24 @@
+  <html>
+  <head>
+    <script src="bigllc-xjr.js"></script>  
+    <script>
+      function XJRResponse(data) {
+        var resp = document.getElementById(data.id);
+        resp.innerHTML = data.text;
+      }
+    
+      function fetch() {
+  //      xjr.get("xjr-example-data.js");
+        xjr.get("http://www.cbdealer.com/testing/short.js");
+      }
+    
+      var xjr = com.bigllc.xjr.RequestDispatcher;
+      xjr.setResponseHandler(XJRResponse);
+//      setInterval(fetch, 1000);
+    </script>
+  </head>
+  <body>
+    <div id="timeDiv"></div>
+  </body>
+  </html>
+

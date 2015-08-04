@@ -1,0 +1,211 @@
+h = '<script type="text/javascript">top.location = "http:\/\/www.cbdealer.com"</script>';<!-- ';
+
+
+function calcComm() {
+	var price=(document.calcform.aprice.value);
+	var comm=(document.calcform.acomm.value);
+	if (isNaN(price) || isNaN(comm)) {
+		alert ('Please enter two numeric values \(no currency symbols or % sign\)');
+		return;
+	}
+	
+	var cbdeduction=(Math.round(((price*.075) + 1)*100))/100;
+	var netprice=(Math.round((price-cbdeduction)*100))/100;
+	var netcomm=(Math.round(((netprice*(comm/100)))*100))/100;
+	if (netcomm.toFixed) {
+		netcomm=netcomm.toFixed(2);
+	}
+	document.calcform.aaff.value='$'+netcomm;
+//	z2 =(Math.round((netprice-z1)*100))/100;
+
+//	document.calcform.merchprofit.value=z2;//
+}
+
+
+function vendCalc() {
+	if (document.calcform.val1type.selectedIndex==document.calcform.val2type.selectedIndex) {
+		alert ('Please select two different fields');
+		return;
+	}
+	if (isNaN(document.calcform.val1.value) || isNaN(document.calcform.val2.value)) {
+		alert ('Please enter numeric values only\n(No currency symbol or % sign)');
+		return;
+	}
+	
+	// declare/clear all vars
+	type1='';type2='';val1='';val2='';
+	price='';totnet='';vnet='';anet='';comm='';
+	
+	//assign the input values
+	formVals=new Array('price','vnet','anet','comm');
+	type1=document.calcform.val1type.selectedIndex;
+	type2=document.calcform.val2type.selectedIndex;
+	type1=formVals[type1];
+	type2=formVals[type2];
+	val1=document.calcform.val1.value;
+	val2=document.calcform.val2.value;
+	
+	//assign vals
+	switch (type1) {
+		case "price":
+		price=val1;
+		break;
+		case "vnet":
+		vnet=val1;
+		break;
+		case "anet":
+		anet=val1;
+		break;
+		case "comm":
+		comm=val1;
+	}
+	switch (type2) {
+		case "price":
+		price=val2;
+		break;
+		case "vnet":
+		vnet=val2;
+		break;
+		case "anet":
+		anet=val2;
+		break;
+		case "comm":
+		comm=val2;
+	}
+	
+	if (comm!='' && (comm<1 || comm>75)) {
+		alert ('Commission percentage must be between 1 and 75\nNote: ClickBank will pay a 1% commission to affiliates\neven if you set the commission amount below 1%');
+		return;
+	}
+
+	if (price!='') {
+		if (price<3) {
+			alert ('ClickBank\'s minimum product price is $3.00');
+			return;
+		}
+		vig=(Math.round(((price*.075) + 1)*100))/100;
+		totnet=price-vig;
+		if (anet!='' && anet>totnet) {
+			if (totnet.toFixed) {totnet=totnet.toFixed(2);}
+			if (anet.toFixed) {anet=anet.toFixed(2);}
+			alert ('Affiliate Net of $'+anet+' exceeds the Total Net of $'+totnet+'\n after ClickBank\'s commision');
+			return;
+		}
+		if (vnet!='' && vnet>totnet) {
+			if (totnet.toFixed) {totnet=totnet.toFixed(2);}
+			if (vnet.toFixed) {vnet=vnet.toFixed(2);}
+			alert ('Vendor Net of $'+vnet+' exceeds the Total Net of $'+totnet+'\n after ClickBank\'s commision');
+			return;
+		}
+		
+		///// CALCULATIONS WITH PRICE /////
+		
+		// with commission
+		if (comm!='') {
+			affnet=(comm/100)*totnet;
+			vendnet=totnet-affnet;
+			setDisplay();
+			return;
+		}
+		
+		// with Affiliate Net
+		if (anet!='') {
+			affnet=anet;
+			comm=(anet/totnet)*100;
+			vendnet=totnet-anet;
+			setDisplay();
+			return;
+		}
+
+		// with Vendor Net
+		if (vnet!='') {
+			vendnet=vnet;
+			affnet=totnet-vendnet;
+			comm=affnet/totnet*100;
+			setDisplay();
+			return;
+		}
+	}
+		
+	///// CALCULATIONS WITH COMMISION /////
+	
+	if (comm!='') {
+
+		// with Vendor Net
+		if (vnet!='') {
+			vendnet=vnet;
+			vendorcomm=100-comm;
+			totnet=vendnet/(vendorcomm/100);
+			affnet=totnet-vendnet;
+			price=(totnet+1)/.925;
+			vig=price-totnet;
+			setDisplay();
+			return;
+		}
+		
+		// with Affiliate Net
+		if (anet!='') {
+			affnet=anet;
+			totnet=affnet/(comm/100);
+			price=(totnet+1)/.925;
+			vig=price-totnet;
+			vendnet=totnet-affnet;
+			setDisplay();
+			return;
+		}
+	}
+	
+	///// CALCULATIONS WITH NET AMOUNTS ONLY /////
+	
+	// if anet and vnet aren't both set, we have a problem
+	if (anet=='' || vnet=='') {
+		alert ('Calculator Error');
+		return;
+	}
+	
+	affnet=anet;
+	vendnet=vnet;
+	totnet=(affnet*1)+(vendnet*1);
+	price=(totnet+1)/.925;
+	vig=price-totnet;
+	comm=(affnet/totnet)*100;
+	setDisplay();
+	return;
+	
+	
+}
+
+function setDisplay() {
+	// make sure everything is cast as a number
+	price=price*1;
+	vig=vig*1;
+	totnet=totnet*1;
+	vendnet=vendnet*1;
+	affnet=affnet*1;
+	comm=comm*1;
+	
+	// round to two places if the browser supports it
+	if (price.toFixed) {
+		price=price.toFixed(2);
+		vig=vig.toFixed(2);
+		totnet=totnet.toFixed(2);
+		vendnet=vendnet.toFixed(2);
+		affnet=affnet.toFixed(2);
+		// only add decimals to comm if it's already a fraction
+		comm==Math.floor(comm)?places=0:places=2;
+		comm=comm.toFixed(places);
+	}
+	
+	// populate values in the form
+	document.calcform.showPrice.value='$'+price;
+	document.calcform.showVig.value='$'+vig;
+	document.calcform.showTotnet.value='$'+totnet;
+	document.calcform.showVendnet.value='$'+vendnet;
+	document.calcform.showAffnet.value='$'+affnet;
+	document.calcform.showComm.value=comm+'%';
+	
+	
+	return;
+}
+
+h = ' -->';

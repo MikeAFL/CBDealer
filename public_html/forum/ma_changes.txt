@@ -1,0 +1,16 @@
+config.php
+5,6
+
+includes/page_header.php
+488-490
+129-130
+
+templates/subSilver/overall_header.tpl
+41 - commented
+42
+
+231 - commented
+233
+
+includes/page_tail.php
+75

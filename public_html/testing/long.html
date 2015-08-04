@@ -1,0 +1,21 @@
+<html>
+
+<head>
+<script type="text/javascript">
+function doSize() {
+	hgt=document.body.scrollHeight;
+//	return hgt;
+	parent.sizeFrame('cdb_frame',hgt);
+	
+}
+</script>
+
+<body onload="doSize()">
+
+
+<script type="text/javascript">
+for (x=0;x<15;x++) {
+	document.write('line'+x+'<p />');
+}
+
+</script>

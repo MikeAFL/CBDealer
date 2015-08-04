@@ -1,0 +1,54 @@
+Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. You may log into your account at www.paypal.com/us to view details of this transaction.
+
+
+Identity Token: 	
+	wPKdWu3rEsTl2LSTMSGaksBjxUFVUHpjnxpEjlWvei4KbQbSWUoD40Gk8ie
+	
+	
+return:	http://www.cbdealer.com/feed_setup.php
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but20.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="cmd" value="_xclick-subscriptions">
+<input type="hidden" name="business" value="paypal@s1m.com">
+<input type="hidden" name="item_name" value="ClickBank Datafeed Monthly">
+<input type="hidden" name="item_number" value="cbdm">
+<input type="hidden" name="page_style" value="CBDealer">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="return" value="http://www.cbdealer.com/feed_setup.php">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="bn" value="PP-SubscriptionsBF">
+<input type="hidden" name="a3" value="4.95">
+<input type="hidden" name="p3" value="1">
+<input type="hidden" name="t3" value="M">
+<input type="hidden" name="src" value="1">
+<input type="hidden" name="sra" value="1">
+
+<input type="hidden" name="rm" value="2">
+<input type="hidden" name="on0" value="sub_email">
+<input type="hidden" name="os0" value="<?=$sub_email?>">
+<input type="hidden" name="on1" value="sub_pass">
+<input type="hidden" name="os1" value="<?=$sub_password?>">
+<input type="hidden" name="item_number_f" value="<?=$ftp?>">
+</form>
+
+added if ftp is requested
+<input type="hidden" name="a1" value=""> - trial amount
+<input type="hidden" name="p1" value="1">
+<input type="hidden" name="t1" value="M">
+
+
+
+https://www.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=paypal%40s1m%2ecom&item_name=ClickBank%20Datafeed%20Monthly&item_number=cbdm&page_style=CBDealer&no_shipping=1&return=http%3a%2f%2fwww%2ecbdealer%2ecom%2ffeed_setup%2ephp&no_note=1&currency_code=USD&lc=US&bn=PP%2dSubscriptionsBF&charset=UTF%2d8&a3=4%2e95&p3=1&t3=M&src=1&sra=1
+
+
+cancel
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=paypal%40s1m%2ecom">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/cancel_subscribe_gen.gif" BORDER="0">
+</A>
+
+https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=paypal%40s1m%2ecom

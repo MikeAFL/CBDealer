@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>Dynamic Script Basic Test</title>
+</head>
+<script>
+//<![CDATA[
+
+
+// called when the "Show Me" button is pressed
+function show_me()
+{
+  ///
+  /// dynamically insert a script tag into the DOM tree
+  ///
+
+  // create the element
+  var script_object = document.createElement('SCRIPT') ;
+  // NOTE: the URL is connecting to a foreign site (and not a js file either)
+//  script_object.src = 'http://www.edgeofnowhere.cc/yo_what_time_is_it.php' ;
+  script_object.src = 'http://www.cbdealer.com/testing/short.html' ;
+  script_object.type = 'text/javascript' ;
+
+  // do the insert
+  var head=document.getElementsByTagName('HEAD')[0] ;
+  head.appendChild( script_object);
+  document.getElementById('response').innerHTML=script_object;
+  
+}
+
+//]]>
+</script>
+<body>
+<p>You are connected to cows-ajax.sourceforge.net but we can ask a foriegn 
+   site for the time.
+<input type="button" onclick="show_me()" value="Show Me"></p>
+<div id="response"></div>
+</body>
+</html>
+	

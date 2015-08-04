@@ -1,0 +1,46 @@
+<html>
+<body>
+<script src="bigllc-xjr.js"></script>
+
+<script>
+var xjr = com.bigllc.xjr.RequestDispatcher;
+</script>
+
+<script>
+
+/* Response handler. Will inject a new div
+* element into the body and insert the data
+* which it assumes is text into the div.
+*/ 
+function myXjrResponseHandler(data) {
+	var body = document.body;
+	var resp = document.createElement("DIV");
+
+
+
+	resp.innerHTML = data;
+	body.appendChild(resp);
+}
+
+function fetch() {
+//	xjr.get("http://www.cbdealer.com/testing/phptest.php");
+today=new Date();
+	xjr.get("http://www.cbdealer.com/testing/rshi.php?a=1124216&today");
+}
+
+var xjr = com.bigllc.xjr.RequestDispatcher;
+xjr.setResponseHandler(myXjrResponseHandler);
+
+
+fetch();
+//var ads=document.getElementById('adtest');
+//ads.innerHTML=data;
+
+
+</script>
+
+<div id="adtest" name="adtest"></div>
+
+<script></script>
+</body>
+</html>

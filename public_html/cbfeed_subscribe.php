@@ -1,0 +1,69 @@
+<?php
+require("config.php");
+
+
+/*** do a JavaScript check ***/
+?>
+
+<body onload="javascript:document.sendorder.submit()">
+
+<?php
+
+/*** Parse the form input ***/
+
+$requireds=array("term","sub_email","sub_password","agreed");
+
+foreach ($requireds as $required) {
+	if (!isset($_POST[$required])) {
+		header("Location:http://www.cbdealer.com/cb_feed.php");
+		exit;
+	} else {
+		$$required=$_POST[$required];
+	}
+}
+
+switch ($term) {
+	case "annual":
+	$rate=49.95;
+	$sub_name="ClickBank Datafeed Annual";
+	$t3="Y"; // PayPal subscription term
+	break;
+	case "monthly":
+	$rate=4.95;
+	$sub_name="ClickBank Datafeed Monthly";
+	$t3="M"; // PayPal subscription term
+}
+
+
+?>
+
+<!--form action="https://www.paypal.com/cgi-bin/webscr" method="post"-->
+<form name="sendorder" action="https://www.paypal.com/cgi-bin/webscr" target="_top" method="post">
+
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="cmd" value="_xclick-subscriptions">
+<input type="hidden" name="business" value="paypal@s1m.com">
+
+<input type="hidden" name="item_name" value="<?=$sub_name?>">
+<input type="hidden" name="page_style" value="CBDealer">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="return" value="http://www.cbdealer.com/cbfeed_setup.php">
+<input type="hidden" name="cancel_return" value="http://www.cbdealer.com/cb_feed.php">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="bn" value="PP-SubscriptionsBF">
+<input type="hidden" name="a3" value="<?=$rate?>">
+<input type="hidden" name="p3" value="1">
+<input type="hidden" name="t3" value="<?=$t3?>">
+<input type="hidden" name="src" value="1">
+<input type="hidden" name="sra" value="1">
+
+<input type="hidden" name="rm" value="2">
+<input type="hidden" name="on0" value="sub_email">
+<input type="hidden" name="os0" value="<?=$sub_email?>">
+<input type="hidden" name="custom" value="<?=$sub_password?>">
+
+</form>
+
+</body>

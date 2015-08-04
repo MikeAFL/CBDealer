@@ -1,0 +1,27 @@
+<html>
+<body>
+<link rel="stylesheet" type="text/css" href="/includes/datepicker.css" />
+<script type="text/javascript" src="/includes/datepicker.js"></script>
+<script type="text/javascript">
+function clearDates() {
+	document.datef.date1.value='';
+	document.datef.date2.value='';
+}
+</script>
+
+<form name="datef">
+Here's an example of displaying the datepicker below a text field:
+<br>
+<b>Start Date:</b> <input type="text" name="date1" readonly="readonly" style="border:none"> 
+<input value="select" onclick="displayDatePicker('date1');" type="button">
+<p />
+<b>End Date:</b> <input type="text" name="date2" readonly="readonly"> 
+<input value="select" onclick="displayDatePicker('date2');" type="button">
+<p />
+<input type="button" value="Clear" onclick="clearDates()" />
+
+</form>
+
+</body>
+
+</html>

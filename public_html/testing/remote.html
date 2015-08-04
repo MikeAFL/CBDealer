@@ -1,0 +1,23 @@
+<!-- BEGIN CBDEALER CODE -->
+<script type="text/javascript" src="http://www.cbdealer.com/includes/keys.js"></script>
+<script type="text/javascript" src="http://www.cbdealer.com/includes/bigllc-xjr.js"></script>
+<script type="text/javascript">
+getKeys();
+today=new Date();
+
+function XJRResponse(data) {
+	var resp = document.getElementById(data.id);
+	resp.innerHTML = data.html;
+}
+
+function fetch() {
+	xjr.get("http://www.cbdealer.com/testing/rshi.php?a=1124216&today");
+}
+
+var xjr = com.bigllc.xjr.RequestDispatcher;
+xjr.setResponseHandler(XJRResponse);
+fetch();
+
+</script>
+
+<div id="adtest"></div>

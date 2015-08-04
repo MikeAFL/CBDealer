@@ -1,0 +1,61 @@
+<script type="text/javascript" language="javascript">
+
+ function calculate() {
+ var price=(document.calcform.price.value);
+ var comm=(document.calcform.comm.value);
+ var cbdeduction=(Math.round(((price*.075) + 1)*100))/100;
+ var netprice=(Math.round((price-cbdeduction)*100))/100;
+ 
+ z1  =(Math.round(((netprice*(comm/100)))*100))/100;
+ z2 =(Math.round((netprice-z1)*100))/100;
+
+ document.calcform.aff.value = z1;
+ document.calcform.merchprofit.value=z2;
+ }
+</script>
+
+<form name="calcform">
+<table>
+<tbody>
+<tr>
+<td><b>Enter Product Price:</b></td>
+<td>$<input size="6" name="prodprice"></td>
+</tr>
+
+<tr>
+<td><b>Enter Commission Rate:</b></td>
+
+<td>&nbsp;&nbsp;<input size="2" name="commrate"> %</td>
+</tr>
+
+<tr>
+<td><input onclick="calculate()" type="button" value="Calculate">
+</td>
+</tr>
+
+<tr>
+<td><b>Affiliate Commission =</b> </td>
+<td>$<input size="6" name="affcomm"> </td>
+
+</tr>
+
+<tr>
+<td><b>Vendor Profit =</b> </td>
+<td>$<input size="6" name="merchprofit"> </td>
+</tr>
+
+<tr>
+<td>
+<hr>
+<p class="ucalclink">Today's Special Offer:   Click <a href=
+"http://www.clickbankguide.com/cavs-order.htm" target=
+"showcase" onmouseover=
+"window.status='Todays Special Offer';return true;" onmouseout=
+"window.status=' ';return true;">here</a></p>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+</form>
